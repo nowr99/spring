@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.title{
+	text-align: left;
+	
+}
+.title > a {
+	text-decoration: none;
+	color: black;
+}
+.vh-500 {
+	height: 500px;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+	<typeAliases>
+  		<typeAlias type="org.nowr.dto.BoardDTO" alias="boardDTO"/> <!-- 존재알리기 -->
+  		<typeAlias type="org.nowr.dto.WriteDTO" alias="writeDTO"/>
+  		<typeAlias type="org.nowr.dto.CommentDTO" alias="commentDTO"/>
+  		<typeAlias type="org.nowr.dto.LoginDTO" alias="loginDTO"/>
+  		<typeAlias type="org.nowr.dto.MemberDTO" alias="memberDTO"/>
+  	</typeAliases>
+  </configuration>
