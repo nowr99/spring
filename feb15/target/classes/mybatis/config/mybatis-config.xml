@@ -10,5 +10,6 @@
   		<typeAlias type="org.nowr.dto.CommentDTO" alias="commentDTO"/>
   		<typeAlias type="org.nowr.dto.LoginDTO" alias="loginDTO"/>
   		<typeAlias type="org.nowr.dto.MemberDTO" alias="memberDTO"/>
+  		<typeAlias type="org.nowr.dto.GalleryDTO" alias="galleryDTO"/>
   	</typeAliases>
   </configuration>

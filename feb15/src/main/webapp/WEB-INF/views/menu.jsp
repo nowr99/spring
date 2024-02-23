@@ -12,6 +12,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="./board">게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./gallery">gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./file">파일</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./mail">메일</a></li>
                         <li class="nav-item"><a class="nav-link" href="./notice">공지</a></li>
                        	<c:choose>
                        		<c:when test="${sessionScope.mid ne null }">

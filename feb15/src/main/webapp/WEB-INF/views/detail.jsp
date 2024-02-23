@@ -73,7 +73,7 @@ function commentInert(){
 
 function likeUp(cno) {
 	Swal.fire("좋아요를 눌러써요!", "", "success");
-	location.href="likeUp?no=${detail.board_no}&cno="+cno;
+	location.href="./likeUp?no=${detail.board_no}&cno="+cno;
 }
 
 //jquery start 24.02.20

@@ -1,6 +1,10 @@
 package org.nowr.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +14,9 @@ import org.apache.commons.mail.SimpleEmail;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+
+import net.coobird.thumbnailator.Thumbnailator;
 
 // @애들 중 그 이외의 기능을 하는 애 @Component
 @Component
@@ -78,9 +85,9 @@ public class Util {
 	 public void sendEmail(String email, String key) throws EmailException {
 		 
 		 //mail 보내기
-			String emailAddr = "";	// 이메일
+			String emailAddr = "nws1993@naver.com";	// 이메일
 			String name = "해킹범입니다";						 // 이름
-			String password = "";						 // 패스워드
+			String password = "Blake21690!";						 // 패스워드
 			String hostName = "smtp-mail.outlook.com"; // 메일
 			int port = 587; 							 // 포트번호
 			
@@ -107,4 +114,40 @@ public class Util {
 		 String key = r.nextInt(10) + "" + r.nextInt(10) + r.nextInt(10) + r.nextInt(10);
 		 return key;
 	 }
+	
+	// 파일 업로드 유틸
+	public String fileUpload(MultipartFile upFile) {
+		
+		// 경로 저장
+		String root = req().getSession().getServletContext().getRealPath("/");
+		String upfilePath = root + "resources\\upfile\\";
+		
+		// UUID 뽑기
+		UUID uuid = UUID.randomUUID();
+		
+		// UUID를 포함한 파일명
+		String newFileName = uuid.toString() + upFile.getOriginalFilename();
+		
+		// 실제 업로드 new File(경로명, 실제 파일명)
+		File file = new File(upfilePath, newFileName);
+		
+		if(file.exists() == false) {
+			file.mkdirs(); // 경로가 없다면 만들어주는 녀석
+		}
+		
+		try {
+			FileOutputStream thumbnail = new FileOutputStream(new File(upfilePath, "s_"+newFileName));
+			Thumbnailator.createThumbnail(upFile.getInputStream(), thumbnail, 100, 100);
+			thumbnail.close();
+			upFile.transferTo(file); // 자바 밖으로가서 파일을 가져오기때문에 try/catch걸어야함
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		} 
+		
+		return newFileName;
+	}
+	 
+	
+	
+
 }
