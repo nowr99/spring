@@ -64,7 +64,7 @@ public class BoardController {
 	public String detail(@RequestParam(value = "no", defaultValue = "0") String no, Model model) {
 		// String no = request.getParameter("no");
 		// System.out.println(util.str2Int(no)); // 숫자면 자신의 숫자, 문자면 0 출력됨
-		// System.out.println(no); // no값 오네요
+		// System.err.println("no 값은" + no); // no값 오네요
 		int reNo = util.str2Int(no);
 		if (reNo != 0) {
 			// 0이 아니야 = 정상접근 : DB에 물어보기(완) / 값 가져오기 / 붙이기(완) / 이동(완)
@@ -154,13 +154,13 @@ public class BoardController {
 
 	// 2024-02-22 요구사항 확인 psd
 	@GetMapping("/likeUp")
-	public String likeUp(@RequestParam("board_no") String no, @RequestParam("cno") String cno) { // board_no=no, cno=cno
-		System.out.println(no);
-		System.out.println(cno);
+	public String likeUp(@RequestParam("no") String no, @RequestParam("cno") String cno) { // board_no=no, cno=cno
+		System.err.println(no);
+		System.err.println(cno);
 		if (util.intCheck(no) && util.intCheck(cno)) {
 			CommentDTO dto = new CommentDTO();
 			dto.setBoard_no(util.str2Int(no));
-			dto.setNo(util.str2Int(no));
+			dto.setNo(util.str2Int(cno));
 			int result = boardService.likeUp(dto);
 			return "redirect:/detail?no="+dto.getBoard_no();
 		} else {

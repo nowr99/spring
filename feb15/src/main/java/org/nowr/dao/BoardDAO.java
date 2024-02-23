@@ -29,8 +29,8 @@ public class BoardDAO {
 	public int commentWrite(CommentDTO comment) {
 		return sqlSession.insert("board.commentWrite", comment);
 	}
-	public List<CommentDTO> commentsList(int reNo) {
-		return sqlSession.selectList("board.commentsList", reNo);
+	public List<CommentDTO> commentsList(int no) {
+		return sqlSession.selectList("board.commentsList", no);
 	}
 	public int postDel(WriteDTO dto) {
 		return sqlSession.update("board.postDel", dto);

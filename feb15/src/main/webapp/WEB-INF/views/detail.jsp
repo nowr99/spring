@@ -39,6 +39,20 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'center-center',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+
+
 function deletePost(){
 	Swal.fire({
 		  title: "글을 삭제하시겠습니까?",
@@ -71,9 +85,11 @@ function commentInert(){
 	}
 }
 
-function likeUp(cno) {
-	Swal.fire("좋아요를 눌러써요!", "", "success");
-	location.href="./likeUp?no=${detail.board_no}&cno="+cno;
+function likeUp(no) {
+	Toast.fire("좋아요를 눌러써요!", "", "success"); 
+	setTimeout(function(){
+	location.href="./likeUp?no=${detail.board_no}&cno="+no;
+	}, 1000);
 }
 
 //jquery start 24.02.20
@@ -90,10 +106,10 @@ $(function(){
 });
 
 // 댓글삭제버튼 24.02.21
-function deleteComment(no) {
+function deleteComment(cno) {
 	//swal.fire("지울꺼야?", no+"번 댓글이야", "warning");
 	if(confirm("지울꺼야?")){
-		location.href="./deleteComment?no=${detail.board_no}&cno="+no; // el태그가 먼저 실행되고 "" 실행됨
+		location.href="./deleteComment?no=${detail.board_no}&cno="+cno; // el태그가 먼저 실행되고 "" 실행됨
 	
 	}
 }

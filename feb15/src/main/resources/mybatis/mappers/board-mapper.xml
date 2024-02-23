@@ -78,7 +78,7 @@
    </insert>
  	
  	<update id="likeUp" parameterType="commentDTO">
- 		UPDATE comment SET clike=clike+1 WHERE cno=#{no}
+ 		UPDATE comment SET clike=clike+1 WHERE board_no=#{board_no} AND cno=#{no}
  	</update>
 
 
