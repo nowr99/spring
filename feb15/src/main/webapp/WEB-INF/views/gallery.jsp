@@ -65,49 +65,54 @@
 			}
 		}
 		
+		function galleryDetail(no) {
+			location.href="./galleryDetail@"+no;
+		}
+		
 		</script>
 	</head>
     <body id="page-top">
         <!-- Navigation-->
         <%@ include file="menu.jsp" %>
 
+
 		<!-- 갤러리글쓰기 -->
-        <section class="page-section" id="gallery">
-            <div class="d-flex justify-content-center">
-               	<div class="text-center">
-               		<h1 class="mt-5">갤러리</h1>
-               		
-               		<table>
-               			<thead>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>이미지</th>
-								<th>날짜</th>
-								<th>좋아요</th>
-							</tr>	
-               			</thead>
-               			<tbody>
-               				<c:forEach items="${list }" var="row">
-               					<tr>
-               						<td>${row.gno }</td>
-               						<td>${row.gtitle }</td>
-               						<td>
-               							<img alt="" src="./upfile/s_${row.gfile }">
-               						</td>
-               						<td>${row.gdate }</td>
-               						<td>${glike }</td>
-               					</tr>
-               				</c:forEach>
-               			</tbody>
-               		</table>
+
+		<section class="py-5 text-center container">
+		    <div class="row py-lg-5">
+		      <div class="col-lg-6 col-md-8 mx-auto">
+		        <h1 class="fw-light">Gallery</h1>
+		        <p class="lead text-body-secondary">갤라뤼 임돠</p>
+		    </div>
+		    </div>
+		  </section>
+		
+		  <div class="album py-5 bg-body-tertiary">
+		    <div class="container">
+		
+		      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+		            <c:forEach items="${list }" var="row">
+		        <div class="col">
+		          <div class="card shadow-sm">
+               		<img alt="" class="card-img-top" width="200" height="200" src="./upfile/s_${row.gfile }" onclick="galleryDetail(${row.gno})">
+		            <div class="card-body">
+		              <p class="card-text">${row.gtitle }</p>
+		              <div class="d-flex justify-content-between align-items-center">
+		                <small class="text-body-secondary">${row.gdate }</small>
+	               		</div>
+		               </div>
+		              </div>
+		            </div>
+	               	</c:forEach>
+		          </div>
+		        
                		
                		<a href="./galleryInsert">갤러리글쓰기로</a>
                		
 					
             	</div>
             </div>
-		</section>
+		
        
        <!-- Services-->
         <!-- <section class="page-section" id="services">

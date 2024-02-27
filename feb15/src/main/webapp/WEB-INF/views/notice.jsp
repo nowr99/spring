@@ -1,6 +1,11 @@
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -54,12 +59,11 @@
 		let content = document.querySelector("#content");
 		//alert(title.value);
 		//alert(content.value);
-		if (title.value.length < 2) {
-			alert("제목은 3글자 이상 입력해주세요");
+		if (title.value.length < 3) {
+			alert("제목은 4글자 이상 입력해주세요");
 			content.focus();
 			return false;
 		} 
-		
 		if (content.value.length < 4) {
 			alert ("내용은 5글자 이상 입력해주세요")
 			content.focus();
@@ -99,7 +103,7 @@
 		}); 
 	}
 	function linkPage(pageNo){
-		location.href="./board?pageNo="+pageNo;
+		location.href="./notice?pageNo="+pageNo;
 	}
 	
 	 
@@ -110,47 +114,54 @@
         <!-- Navigation-->
         <%@ include file="menu.jsp" %>
         
-        <!-- 게시판 -->
+        <!-- 공지사항 -->
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">그만 바꾸고 싶어요</h2>
+                    <h2 class="section-heading text-uppercase">그만 바꾸고 싶어요2</h2>
                 </div>
                 <div class="row text-center">
-                    <table class="table table-hover">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>글쓴이</th>
-							<th>날짜</th>
-							<th>읽음</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list }" var="row">
-						<tr>
-							<td onclick="detail(${row.board_no })">${row.board_no }</td>
-							<td class="title" >
-								<a href="./detail?no=${row.board_no }"> 
-									${row.board_title } 
-									<c:if test="${row.comment gt 0 }">
-										<span class="badge text-bg-secondary"> ${row.comment }</span>
-									</c:if>
-								</a>
-							</td>
-							<td>${row.mname }</td>
-							<td>${row.board_date }</td>
-							<td>${row.board_count }</td>
-						</tr>
-						</c:forEach>
-					</tbody>
-					</table>
+                	
+                
+                	<c:choose>
+                		<c:when test="${fn:length(list) gt 0 }">
+                			<table class="table table-hover">
+                				<thead>
+                					<tr>
+                						<th>번호</th>
+                						<th>제목</th>
+                						<th>날짜</th>
+                						<th>읽음</th>
+                					</tr>
+                				</thead>
+                				<tbody>
+                					<c:forEach items="${list }" var="row">
+                					<tr onclick="location.href='./noticeDetail?no=${row.nno}'">
+                						<td>${row.nno }</td>
+                						<td>
+                						${row.ntitle }
+                						<c:if test="${row.ndate gt LocalDate.now() }">
+                						 <span class="badge text-bg-secondary">N</span>
+                						 </c:if></td>
+                						<td>${row.ndate }</td>
+                						<td>${row.nread }</td>
+                					</tr>
+                					</c:forEach>
+                				</tbody>
+                			</table>
+                		</c:when>
+                		<c:otherwise>
+                			<h1>텅 비어있습니다</h1>
+                		</c:otherwise>
+                	</c:choose>  
+                	
+					
 					
 					<!-- 페이징 -->
 					<div class="m-2 ">
 						<ui:pagination paginationInfo = "${paginationInfo}" type="image" jsFunction="linkPage"/>
-					</div>
+					</div> 
+					
 					<!-- 로그인해야 글쓰기 보이게하기 -->
 					<c:if test="${sessionScope.mid ne null }">
 						<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#write">글쓰기</button>

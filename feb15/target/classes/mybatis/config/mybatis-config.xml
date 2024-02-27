@@ -11,5 +11,6 @@
   		<typeAlias type="org.nowr.dto.LoginDTO" alias="loginDTO"/>
   		<typeAlias type="org.nowr.dto.MemberDTO" alias="memberDTO"/>
   		<typeAlias type="org.nowr.dto.GalleryDTO" alias="galleryDTO"/>
+  		<typeAlias type="org.nowr.dto.NoticeDTO" alias="noticeDTO"/>
   	</typeAliases>
   </configuration>

@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService {
+public class LoginService extends AbstractService {
 	
 	@Autowired
 	private LoginDAO loginDAO;
 	
-	@Autowired
-	private Util util;
 	
 	public LoginDTO login(LoginDTO dto) {
 		return loginDAO.login(dto);

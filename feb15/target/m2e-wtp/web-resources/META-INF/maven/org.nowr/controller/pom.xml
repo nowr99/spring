@@ -40,41 +40,49 @@
 
 
 	<dependencies>
-	
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.16.1</version>
 		</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
-	<dependency>
-    	<groupId>org.apache.commons</groupId>
-    	<artifactId>commons-email</artifactId>
-    	<version>1.5</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
-	<dependency>
-    	<groupId>net.coobird</groupId>
-    	<artifactId>thumbnailator</artifactId>
-    	<version>0.4.20</version>
-	</dependency>
-	
-	<!-- log찍기 -->
-      <dependency>
-         <groupId>org.lazyluke</groupId>
-         <artifactId>log4jdbc-remix</artifactId>
-         <version>0.2.7</version>
-      </dependency>
 
-      <!-- db+ -->
-      <dependency>
-         <groupId>commons-dbcp</groupId>
-         <artifactId>commons-dbcp</artifactId>
-         <version>1.4</version>
-      </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.20</version>
+		</dependency>
+
+		<!-- log찍기 -->
+		<dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
+		</dependency>
+
+		<!-- db+ -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>

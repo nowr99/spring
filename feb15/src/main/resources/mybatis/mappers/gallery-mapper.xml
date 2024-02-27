@@ -2,16 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="gallery">
-  	
-  	<insert id="galleryInsert" parameterType="galleryDTO">
-  		INSERT INTO gallery (gtitle, gcontent, gfile, mno) VALUES (#{gtitle}, #{gcontent}, #{gfile}, (SELECT mno FROM member WHERE mid=#{mid})) 
-  	</insert>
+
+<mapper namespace="gallery">
+
+	<insert id="galleryInsert" parameterType="galleryDTO">
+		INSERT INTO gallery (gtitle, gcontent, gfile, mno) VALUES (#{gtitle},
+		#{gcontent}, #{gfile}, (SELECT mno FROM member WHERE mid=#{mid}))
+	</insert>
+
+	<select id="galleryList" resultType="galleryDTO">
+		SELECT gno, gtitle, gfile,
+		if(
+		date_format(now(), '%Y-%m-%d') = date_format(gdate, '%Y-%m-%d' ),
+		date_format(gdate, '%h:%i'),
+		date_format(gdate, '%Y-%m-%d')
+		) as gdate, glike, gcontent
+		FROM gallery
+		where gdel = '1'
+		ORDER BY gno desc
+	</select>
+
+	<select id="galleryDetail" resultType="galleryDTO" parameterType="Integer">
+		SELECT g.gno, g.gtitle, g.gfile,
+		if(
+		date_format(now(), '%Y-%m-%d') = date_format(gdate, '%Y-%m-%d' ),
+		date_format(gdate, '%h:%i'),
+		date_format(gdate, '%Y-%m-%d')
+		) as gdate, g.glike, gcontent, m.mid, m.mname
+		FROM gallery g JOIN member m ON g.mno=m.mno WHERE g.gno = #{no}
+		
+	</select>
+	
+	<update id="galleryDel" parameterType="galleryDTO">
+ 		<![CDATA[
+ 		UPDATE gallery SET gdel = '0' WHERE gno=#{no}
+ 		]]> 
+ 	</update>
  	
- 	<select id="galleryList" resultType="galleryDTO">
-	 	SELECT *
-	 	FROM gallery
- 	</select>
- 	
-  </mapper> 
+</mapper> 

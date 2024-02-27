@@ -11,13 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardService {
+public class BoardService extends AbstractService {
 
 	@Autowired
 	private BoardDAO boardDAO;
-
-	@Autowired
-	private Util util;
 
 	public List<BoardDTO> boardList(int PageNo) {
 		// System.out.println("서브시통과");

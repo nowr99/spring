@@ -2,6 +2,8 @@ package org.nowr.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.nowr.dto.GalleryDTO;
 import org.nowr.service.GalleryService;
 import org.nowr.util.Util;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class GalleryController {
 	
-	@Autowired 
+	@Resource(name="galleryService")
 	private GalleryService galleryService;
 	
 	@Autowired
@@ -57,4 +60,31 @@ public class GalleryController {
 		return "redirect:/gallery";
 	}
 
+	// galleryDetail
+	// 2024-02-26 요구사항 확인
+	@GetMapping("/galleryDetail@{no}")
+	public String galleryDetail(@PathVariable("no") String no, Model model) {
+		//System.out.println("경로 : " + no);
+		int reNo = util.str2Int(no);
+		if (reNo != 0) {
+			GalleryDTO galleryDetail = galleryService.galleryDetail(reNo);
+			model.addAttribute("galleryDetail", galleryDetail);
+			return "galleryDetail";
+		} else {
+			return "redirect:/error";
+		}
+	}
+	
+	// galleryDel
+	@PostMapping("/galleryDel")
+	public String galleryDel (@RequestParam("no") int no) {
+		if (util.getSession().getAttribute("mid") != null) {
+			int result = galleryService.galleryDel(no);
+			System.out.println("result :" + result);
+			return "redirect:/gallery";
+		} else {
+		return "redirect:/error";
+		}
+	}
+	
 }

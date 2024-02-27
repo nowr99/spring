@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RestService {
+public class RestService extends AbstractService {
 
-	@Autowired
-	private Util util;
 	
 	@Autowired
 	private RestDAO restDAO;

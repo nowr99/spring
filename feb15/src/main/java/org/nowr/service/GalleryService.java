@@ -2,41 +2,16 @@ package org.nowr.service;
 
 import java.util.List;
 
-import org.nowr.dao.GalleryDAO;
 import org.nowr.dto.GalleryDTO;
-import org.nowr.util.Util;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class GalleryService {
+public interface GalleryService {
 	
-	@Autowired
-	private GalleryDAO galleryDAO;
+	// 인터페이스에서는 추상 메소드
+	public int galleryInsert(GalleryDTO dto);
 	
-	@Autowired
-	private Util util;
+	public List<GalleryDTO> galleryList();
 	
-	public int galleryInsert(GalleryDTO dto) {
-		// 세션ㄴ추가
-		if(util.getSession().getAttribute("mid") != null) {
-			dto.setMid((String) util.getSession().getAttribute("mid"));
-			return galleryDAO.galleryInsert(dto);
-		} else {
-			return 0;
-		}
-	}
-
-	public List<GalleryDTO> galleryList() {
-		GalleryDTO dto = new GalleryDTO();
-		dto.getGtitle();
-		dto.getGcontent();
-		dto.getGdate();
-		dto.getGfile();
-		dto.getGlike();
-		dto.getGno();
-		dto.getMid();
-		dto.getMname();
-		return galleryDAO.galleryList();
-	}
+	public GalleryDTO galleryDetail(int no);
+	
+	public int galleryDel(int no);
 }

@@ -78,7 +78,6 @@ public class BoardController {
 
 				// System.out.println(commentsList.get(0).getMname());
 			}
-
 			return "detail";
 		} else {
 			// 0이야 = 비정상접근 : 에러페이지로 이동
