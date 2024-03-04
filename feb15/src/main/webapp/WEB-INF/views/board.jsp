@@ -99,7 +99,7 @@
 		}); 
 	}
 	function linkPage(pageNo){
-		location.href="./board?pageNo="+pageNo;
+		location.href="./board?search=${param.search}&pageNo="+pageNo;
 	}
 	
 	 
@@ -146,6 +146,18 @@
 						</c:forEach>
 					</tbody>
 					</table>
+					
+					<!-- 검색 -->
+					<div class="m-2 bg-secondary">
+						<div>
+							<form action="./board">
+								<input type="text" name="search">
+								<!-- <input type="hidden" name="pageNo" value="${pageNo }"> 얘는 검증용 코드 -->
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</div>
+					
 					
 					<!-- 페이징 -->
 					<div class="m-2 ">

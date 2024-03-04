@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
@@ -88,13 +89,57 @@ public class LoginController {
 		if (util.getSession().getAttribute("mid") != null) {
 
 			// 인증요청 -> ajax용으로 만들꺼임
-			//loginService.myInfo();
+			// loginService.myInfo();
 
 			return "myinfo";
 		} else {
+
+			return "redirect:/login";
+		}
+
+	}
+	// 2024.02.28 어플리케이션 테스트 수행
+	
+	/* 스케치 -> 와이어프레임 -> 목업 -> 프로토타입 -> 스토리보드 
+	 * 
+	 * 와이어프레임 : 기획단계의 기초를 제작하는 단계. 페이지의 레이아웃이나 UI요소 등 (뼈대)
+	 * 
+	 * 목업 		: 와이어 프레임보다 조금 더 설계 화면과 유사하게 만드는 것. (정적 모델링)
+	 * 
+	 * 프로토 타입 	: 다양한 인터렉션이 결합되어 실제 서비스 처럼 동작하는 것.
+	 * 
+	 * 스토리보드 	: 설명, 기능, 명세서, 와이어프레임, 프로세스, 정책 등등 (설계문서)
+	 *  
+	 */
+	
+	// 회원가입 
+	// 아이디 -> 중복검사
+	// 비밀번호 1, 2
+	// 이메일 -> 중복불가
+	// 닉네임
+	@GetMapping ("/join")
+	public String join () {
+		return "join";
+	}
+	
+	@PostMapping ("/join")
+	public String join(HttpServletRequest request) {
+		System.out.println(request.getParameter("id"));
+		System.out.println(request.getParameter("pw"));
+		System.out.println(request.getParameter("name"));
+		System.out.println(request.getParameter("email"));
+		
+		MemberDTO join = new MemberDTO();
+		join.setMid(request.getParameter("id"));
+		join.setMpw(request.getParameter("pw"));
+		join.setMname(request.getParameter("name"));
+		join.setMemail(request.getParameter("email"));
+		
+		int result = loginService.join(join);
 		
 		return "redirect:/login";
 	}
 
-}
+	
+
 }

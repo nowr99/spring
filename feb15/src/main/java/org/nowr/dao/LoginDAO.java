@@ -1,6 +1,7 @@
 package org.nowr.dao;
 
 import org.nowr.dto.LoginDTO;
+import org.nowr.dto.MemberDTO;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,5 +22,10 @@ public class LoginDAO extends AbstractDAO {
 	public String getEmail(String email) {
 		return sqlSession.selectOne("login.getEmail", email);
 	}
+
+	public int join(MemberDTO join) {
+		return sqlSession.insert("login.join", join);
+	}
+
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.nowr.dao.BoardDAO;
 import org.nowr.dto.BoardDTO;
 import org.nowr.dto.CommentDTO;
+import org.nowr.dto.SearchDTO;
 import org.nowr.dto.WriteDTO;
 import org.nowr.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class BoardService extends AbstractService {
 	@Autowired
 	private BoardDAO boardDAO;
 
-	public List<BoardDTO> boardList(int PageNo) {
+	public List<BoardDTO> boardList(SearchDTO searchDTO) {
 		// System.out.println("서브시통과");
-		return boardDAO.boardList(PageNo);
+		return boardDAO.boardList(searchDTO);
 	}
 
 	public BoardDTO detail(int no) {
@@ -64,8 +65,8 @@ public class BoardService extends AbstractService {
 		return boardDAO.postDel(dto);
 	}
 
-	public int totalRecordCount() {
-		return boardDAO.totalRecordCount();
+	public int totalRecordCount(String search) {
+		return boardDAO.totalRecordCount(search);
 	}
 
 	public int deleteComment(int no, int cno) {

@@ -7,7 +7,7 @@
   	
   	<select id="login" parameterType="loginDTO" resultType="loginDTO">
 	<![CDATA[
-  		SELECT COUNT(*) as count, mname, mcount, mpw as pw FROM member WHERE mid=#{id} AND mgrade > 4
+  		SELECT COUNT(*) as count, mname, mcount, AES_DECRYPT(UNHEX(mpw),'Daiso') as pw FROM member WHERE mid=#{id} AND mgrade > 4
   	]]>
   	</select>
  	
@@ -18,5 +18,11 @@
  	<update id="mcountReset" parameterType="loginDTO">
  		UPDATE member SET mcount = 1 WHERE mid=#{id}
  	</update>
+ 	
+ 	<insert id="join" parameterType="memberDTO">
+ 		INSERT INTO member (mid, mpw, mname, memail) VALUES (#{mid}, HEX(AES_ENCRYPT(#{mpw}, 'Daiso')), #{mname}, #{memail})
+ 	</insert>
+ 	
+ 	
  	
   </mapper> 

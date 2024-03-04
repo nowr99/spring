@@ -26,6 +26,11 @@ public class LoginService extends AbstractService {
 		loginDAO.mcountReset(loginDTO);
 	}
 
+	public int join(MemberDTO join) {
+		return loginDAO.join(join);
+	}
+
+
 	
 
 

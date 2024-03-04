@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
+        <title>파 전 막 걸 리</title>
         <!-- Favicon-->
         <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="assets/apple-icon-60x60.png">
@@ -115,11 +115,7 @@
 				Swal.fire("에엥?", "잘못된 접근입니다.", "error");	
     		</script>
     	</c:if>
-    	<c:if test="${param.login ne null }">
-    		<script type="text/javascript">
-				Swal.fire("땡", "아이디와 비밀번호를 확인하세요.", "error");	
-    		</script>
-    	</c:if>
+    	
   		<c:if test="${param.count ne null }">
   			<script type="text/javascript">
   				let count = ${param.count};

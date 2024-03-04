@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.nowr.dto.BoardDTO;
 import org.nowr.dto.CommentDTO;
+import org.nowr.dto.SearchDTO;
 import org.nowr.dto.WriteDTO;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BoardDAO extends AbstractDAO {
 	
-	public List<BoardDTO> boardList(int pageNo) {
+	public List<BoardDTO> boardList(SearchDTO searchDTO) {
 		//System.out.println("다오 통과");
-		return sqlSession.selectList("board.boardList", pageNo);
+		return sqlSession.selectList("board.boardList", searchDTO);
 	}
 	public BoardDTO detail(int no) {
 		return sqlSession.selectOne("board.detail", no);
@@ -29,8 +30,8 @@ public class BoardDAO extends AbstractDAO {
 	public int postDel(WriteDTO dto) {
 		return sqlSession.update("board.postDel", dto);
 	}
-	public int totalRecordCount() {
-		return sqlSession.selectOne("board.totalRecordCount");
+	public int totalRecordCount(String search) {
+		return sqlSession.selectOne("board.totalRecordCount", search);
 	}
 	public int deleteComment(CommentDTO dto) {
 		return sqlSession.update("board.deleteComment", dto);

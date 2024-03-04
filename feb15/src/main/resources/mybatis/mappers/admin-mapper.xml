@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+
+	<select id="boardList" parameterType="searchDTO"
+		resultType="boardDTO">
+		SELECT b.board_no AS board_no, b.board_title AS board_title, m.mname
+		AS mname, b.board_date AS board_date, b.board_ip AS board_ip,
+		b.board_del AS board_del FROM board b JOIN member m ON b.mno = m.mno
+		<where>
+			<if test="searchTitle == 1">
+				b.board_title LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="searchTitle == 2">
+				b.board_content LIKE CONCAT ('%', #{search}, '%')
+			</if>
+			<if test="searchTitle == 3">
+				m.mname LIKE CONCAT ('%', #{search}, '%')
+			</if>
+		</where>
+		ORDER BY board_no DESC
+		LIMIT #{pageNo}, #{recordCountPerPage};
+	</select>
+
+	<select id="totalRecordCount" parameterType="searchDTO"
+		resultType="Integer">
+		SELECT COUNT (*) FROM board b JOIN member m ON b.mno = m.mno
+		<where>
+			<if test="searchTitle == 1">
+				b.board_title LIKE CONCAT('%', #{search}, '%')
+			</if>
+			<if test="searchTitle == 2">
+				b.board_content LIKE CONCAT ('%', #{search}, '%')
+			</if>
+			<if test="searchTitle == 3">
+				m.mname LIKE CONCAT ('%', #{search}, '%')
+			</if>
+		</where>
+	</select>
+
+	<update id="postDel" parameterType="Integer">
+		UPDATE board SET board_del= CASE WHEN board_del='0' THEN '1'
+		ELSE '0' END WHERE board_no=#{no}
+	</update>
+
+	<select id="noticeList" resultType="noticeDTO">
+		SELECT nno, ntitle, ncontent, nread, nlike, ndel, ndate, ntoday FROM notice ORDER BY nno DESC
+	</select>
+</mapper> 
