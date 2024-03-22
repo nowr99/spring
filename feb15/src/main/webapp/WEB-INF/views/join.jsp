@@ -59,6 +59,52 @@
 				let name = $('#name').val();
 				let email = $('#email').val();
 				
+				if(id.length < 3 || id.length > 10){
+					$('#id').focus();
+        			Swal.fire('회원가입','아이디는 3~10글자 사이여야 합니다.', 'error');
+        			return false;
+				}
+				
+				if(pw1 == ''){
+        			$('#pw1').focus();
+        			Swal.fire('회원가입','암호를 입력하세요.', 'error');
+        			return false;
+        		}
+				
+        		if(pw2 == ''){
+        			$('#pw2').focus();
+        			Swal.fire('회원가입','암호를 다시 입력하세요.', 'error');
+        			return false;
+        		}
+        		
+        		if(pw1.length < 3 || pw1.length > 10){
+        			$('#pw1').text('');
+        			$('#pw2').text('');
+        			$('#pw1').focus();
+        			Swal.fire('회원가입','아이디는 3~10글자 사이여야 합니다.', 'error');
+        			return false;
+        			
+        		} else if(pw1 != pw2){
+        			$('#pw1').text('');
+        			$('#pw2').text('');
+        			$('#pw1').focus();
+        			Swal.fire('회원가입','비밀번호가 일치하지 않습니다.', 'error');
+        			return false;	
+        		}
+        		
+        		if(name.length < 3 || name.length > 10){
+        			Swal.fire('회원가입','닉네임은 3~10글자 사이여야 합니다.', 'error');
+        			$('#name').focus();
+        			return false;
+        		}
+        		
+        		const regExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
+          		if(!regExp.test(email)){
+          			Swal.fire('회원가입','이메일 형식이 아닙니다.', 'error');
+            		return false;
+          		}
+				
+          		
 				let loginForm = $('<form></form>');
 				loginForm.attr('name', 'login');
 				loginForm.attr('method', 'post');
@@ -87,11 +133,10 @@
 						// 3글자 이상, 10글자 이하 = 정상 -> ajax
 						$.ajax({
 							url : './idCheck',
-							post : 'post',
+							type : 'post',
 							dataType : 'json',
 							data : {id : id},
 							success : function (data){
-								alert(data.count);
 								if(data.count == 1){
 									Swal.fire('ID검사', '이미 가입된 ID 입니다.', 'warning');
 								} else {

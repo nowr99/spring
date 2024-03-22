@@ -4,6 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 
+<script type="text/javascript">
+	function linkPage(pageNo){
+		location.href="./notice?pageNo="+pageNo
+	}
+</script>
 <head>
 
     <meta charset="utf-8">
@@ -43,6 +48,17 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">공쥐공쥐공주이공지</h1>
+				
+				<div class = "m-2 row">
+					<select name="perPage" id="perPage" class="form-control col-1">
+						<option>10개씩</option>
+						<option>20개씩</option>
+						<option>30개씩</option>
+						<option>40개씩</option>
+						<option>50개씩</option>
+						<option>60개씩</option>
+					</select>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr class="row">
@@ -57,7 +73,7 @@
 						<c:forEach items="${list }" var="row">
 						<tr class="row">
 							<td class="col-1 text-center">${row.nno }</td>
-							<td class="col-5">${row.ntitle }</td>
+							<td class="col-5"><a href="/noticeDetail?no=${row.nno}">${row.ntitle }</a></td>
 							<td class="col-4 text-center">${row.ndate }</td>
 							<td class="col-1 text-center">${row.nread }</td>
 							<td class="col-1 text-center">${row.ndel }</td>
@@ -65,6 +81,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<div class="m-2 text-center">
+					<ui:pagination paginationInfo="${paginationInfo }" type="text" jsFunction="linkPage"/>
+				</div>
                 </div>
                 <!-- /.container-fluid -->
 

@@ -47,6 +47,7 @@
 	</update>
 
 	<select id="noticeList" resultType="noticeDTO">
-		SELECT nno, ntitle, ncontent, nread, nlike, ndel, ndate, ntoday FROM notice ORDER BY nno DESC
+		SELECT nno, ntitle, ncontent, nread, nlike, ndel, ndate, ntoday FROM notice ORDER BY nno DESC 
+		LIMIT 0, 10
 	</select>
 </mapper> 
